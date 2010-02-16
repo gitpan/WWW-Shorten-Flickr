@@ -1,10 +1,11 @@
 package WWW::Shorten::Flickr;
 use strict;
 use warnings;
+use 5.008_001;
 use base qw( WWW::Shorten::generic Exporter );
 our @EXPORT = qw( makeashorterlink makealongerlink );
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Carp;
 use Encode::Base58;
@@ -13,7 +14,7 @@ sub makeashorterlink {
     my $uri = shift or croak 'No URL passed to makeashorterlink';
 
     my $photo_id;
-    if (   $uri =~ m!^http://www\.flickr\.com/photos/\w+/(\d+)!i
+    if (   $uri =~ m!^http://www\.flickr\.com/photos/[\w@-]+/(\d+)!i
         || $uri =~ /^(\d+)$/ )
     {
         $photo_id = $1;
